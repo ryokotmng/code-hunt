@@ -166,6 +166,7 @@ a {
 .navbar {
   text-align: center;
   padding: 10px 10px 5px;
+  height: 50px;
 }
 
 .navbar .left-side {

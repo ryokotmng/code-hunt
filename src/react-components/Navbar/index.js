@@ -27,7 +27,7 @@ class Navbar extends React.Component {
 
   renderLogo() {
     return (
-      <a href="#"><img src="/img/favicon.png" className="small-avatar"/></a>
+      <a href="#"><img src="https://fontmeme.com/permalink/170902/eb5caefb22ae09990722be27258d1896.png" /></a>
     );
   }
 

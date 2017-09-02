@@ -21098,7 +21098,7 @@ var LoginPopup = function (_React$Component) {
       return _react2.default.createElement(
         _Popup2.default,
         this.props,
-        _react2.default.createElement('img', { src: '/img/kitty.png' }),
+        _react2.default.createElement('img', { src: 'https://fontmeme.com/permalink/170902/8a48eabdae4397362dc37cf8e0951858.png' }),
         _react2.default.createElement(
           'h1',
           null,
@@ -21258,7 +21258,7 @@ var Navbar = function (_React$Component) {
       return _react2.default.createElement(
         'a',
         { href: '#' },
-        _react2.default.createElement('img', { src: '/img/favicon.png', className: 'small-avatar' })
+        _react2.default.createElement('img', { src: 'https://fontmeme.com/permalink/170902/eb5caefb22ae09990722be27258d1896.png' })
       );
     }
   }, {
