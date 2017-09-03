@@ -8,7 +8,7 @@ var config = {
   databaseURL: "https://code-hunt-demo-bf57c.firebaseio.com",
   projectId: "code-hunt-demo-bf57c",
   storageBucket: "code-hunt-demo-bf57c.appspot.com",
-  // messagingSenderId: "148978170909"
+  messagingSenderId: "148978170909"
 };
 
 Firebase.initializeApp(config);

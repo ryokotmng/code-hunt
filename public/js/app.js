@@ -46399,8 +46399,8 @@ var config = {
   authDomain: "code-hunt-demo-bf57c.firebaseapp.com",
   databaseURL: "https://code-hunt-demo-bf57c.firebaseio.com",
   projectId: "code-hunt-demo-bf57c",
-  storageBucket: "code-hunt-demo-bf57c.appspot.com"
-  // messagingSenderId: "148978170909"
+  storageBucket: "code-hunt-demo-bf57c.appspot.com",
+  messagingSenderId: "148978170909"
 };
 
 _firebase2.default.initializeApp(config);
