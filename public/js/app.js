@@ -65480,7 +65480,12 @@ var Actions = function () {
     value: function getProducts() {
       return function (dispatch) {
         _firebase2.default.database().ref('products').on('value', function (snapshot) {
-          var products = _lodash2.default.values(snapshot.val());
+          var productsValue = snapshot.val();
+          var products = (0, _lodash2.default)(productsValue).keys().map(function (productKey) {
+            var item = _lodash2.default.clone(productsValue[productKey]);
+            item.key = productKey;
+            return item;
+          }).value();
           dispatch(products);
         });
       };
@@ -65490,6 +65495,19 @@ var Actions = function () {
     value: function addProduct(product) {
       return function (dispatch) {
         _firebase2.default.database().ref('products').push(product);
+      };
+    }
+  }, {
+    key: 'addVote',
+    value: function addVote(productId, userId) {
+      return function (dispatch) {
+        var firebaseRef = _firebase2.default.database().ref('products/' + productId + '/upvote');
+
+        var vote = 0;
+        firebaseRef.on('value', function (snapshot) {
+          vote = snapshot.val();
+        });
+        firebaseRef.set(vote + 1);
       };
     }
   }]);
@@ -66169,6 +66187,18 @@ var _ProductPopup = require('./ProductPopup');
 
 var _ProductPopup2 = _interopRequireDefault(_ProductPopup);
 
+var _actions = require('../../actions');
+
+var _actions2 = _interopRequireDefault(_actions);
+
+var _connectToStores = require('alt-utils/lib/connectToStores');
+
+var _connectToStores2 = _interopRequireDefault(_connectToStores);
+
+var _ProductStore = require('../../stores/ProductStore');
+
+var _ProductStore2 = _interopRequireDefault(_ProductStore);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -66193,6 +66223,10 @@ var ProductItem = function (_React$Component) {
       _this.setState({ productPopupStatus: false });
     };
 
+    _this.handleVote = function () {
+      _actions2.default.addVote(_this.props.pid, _this.props.user);
+    };
+
     _this.state = {
       productPopupStatus: false
     };
@@ -66204,7 +66238,7 @@ var ProductItem = function (_React$Component) {
     value: function renderUpvoteButton() {
       return _react2.default.createElement(
         'a',
-        { className: 'upvote-button', href: '#' },
+        { className: 'upvote-button', href: '#', onClick: this.handleVote },
         _react2.default.createElement(
           'span',
           null,
@@ -66266,6 +66300,16 @@ var ProductItem = function (_React$Component) {
         _react2.default.createElement(_ProductPopup2.default, { status: this.state.productPopupStatus, hidePopup: this.hideProductPopup })
       );
     }
+  }], [{
+    key: 'getStores',
+    value: function getStores() {
+      return [_ProductStore2.default];
+    }
+  }, {
+    key: 'getPropsFromStores',
+    value: function getPropsFromStores() {
+      return _ProductStore2.default.getState();
+    }
   }]);
 
   return ProductItem;
@@ -66273,7 +66317,7 @@ var ProductItem = function (_React$Component) {
 
 exports.default = ProductItem;
 
-},{"./ProductPopup":359,"react":347}],358:[function(require,module,exports){
+},{"../../actions":349,"../../stores/ProductStore":361,"./ProductPopup":359,"alt-utils/lib/connectToStores":1,"react":347}],358:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -66316,7 +66360,7 @@ var ProductList = function (_React$Component) {
         'ul',
         { className: 'product-list' },
         this.props.productList.map(function (item, idx) {
-          return _react2.default.createElement(_ProductItem2.default, _extends({ key: idx }, item));
+          return _react2.default.createElement(_ProductItem2.default, _extends({ key: idx, pid: item.key }, item));
         })
       );
     }
