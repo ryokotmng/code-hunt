@@ -21786,7 +21786,16 @@ var ProductPopup = function (_React$Component) {
           name: 'TechCamp',
           avatar: '/img/techcamp.png'
         }
-      }
+      },
+      comments: [{
+        name: "NERV",
+        avatar: "/img/NERV.jpg",
+        content: "最優先事項だ"
+      }, {
+        name: "Anzai",
+        avatar: "/img/Anzai.jpeg",
+        content: "なぁ〜んか勘違いしとりゃせんか？"
+      }]
     };
     return _this;
   }
@@ -21853,7 +21862,8 @@ var ProductPopup = function (_React$Component) {
           { className: 'post-comment' },
           _react2.default.createElement('img', { className: 'medium-avatar', src: '/img/NERV.jpg' }),
           _react2.default.createElement('input', { placeholder: 'What do you think of this product?' })
-        )
+        ),
+        this.renderComments()
       );
     }
   }, {
@@ -21867,6 +21877,35 @@ var ProductPopup = function (_React$Component) {
           null,
           this.renderBodyDiscussion()
         )
+      );
+    }
+  }, {
+    key: 'renderComments',
+    value: function renderComments() {
+      return _react2.default.createElement(
+        'ul',
+        { className: 'comment-list' },
+        this.state.comments.map(function (comment, idx) {
+          return _react2.default.createElement(
+            'li',
+            { key: idx },
+            _react2.default.createElement('img', { className: 'medium-avatar', src: comment.avatar }),
+            _react2.default.createElement(
+              'section',
+              null,
+              _react2.default.createElement(
+                'strong',
+                null,
+                comment.name
+              ),
+              _react2.default.createElement(
+                'p',
+                null,
+                comment.content
+              )
+            )
+          );
+        })
       );
     }
   }, {
