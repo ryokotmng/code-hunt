@@ -1,5 +1,6 @@
 import alt from '../alt';
 import Firebase from 'firebase';
+import _ from 'lodash';
 
 var config = {
   apiKey: "AIzaSyAWjsf11fwPx5mALdupWde9qlMjoCPp9Ng",
@@ -67,11 +68,18 @@ class Actions {
   getProducts() {
     return(dispatch) => {
       Firebase.database().ref('products').on('value', function(snapshot) {
-        var products = snapshot.val();
+        var products = _.values(snapshot.val());
         dispatch(products);
       });
     }
   }
+
+  addProduct(product) {
+    return (dispatch) => {
+      Firebase.database().ref('products').push(product);
+    }
+  }
+
 }
 
 export default alt.createActions(Actions);

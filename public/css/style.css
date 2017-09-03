@@ -48,6 +48,7 @@ table {
 }
 
 /*------------------------------ CUSTOM ------------------------------*/
+
 body {
   font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
   font-size: 13px;
@@ -264,11 +265,11 @@ button:hover {
 
 .post-btn {
   color: white;
-  background: #5e9aee;
+  background: #ffcc99;
 }
 
 .post-popup .post-header {
-  background: #5e9aee;
+  background: #ffcc99;
   color: white;
   text-align: center;
   padding: 20px;
