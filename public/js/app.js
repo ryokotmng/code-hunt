@@ -66186,6 +66186,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = require('react');
@@ -66306,7 +66308,7 @@ var ProductItem = function (_React$Component) {
         _react2.default.createElement('img', { className: 'product-item-media', src: this.props.media }),
         this.renderInfoSession(),
         this.renderNewWindowIcon(),
-        _react2.default.createElement(_ProductPopup2.default, { status: this.state.productPopupStatus, hidePopup: this.hideProductPopup })
+        _react2.default.createElement(_ProductPopup2.default, _extends({}, this.props, { status: this.state.productPopupStatus, hidePopup: this.hideProductPopup }))
       );
     }
   }], [{
@@ -66416,18 +66418,6 @@ var ProductPopup = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (ProductPopup.__proto__ || Object.getPrototypeOf(ProductPopup)).call(this));
 
     _this.state = {
-      product: {
-        id: 2,
-        name: 'Tech::Camp',
-        link: 'https://tech-camp.in/',
-        media: '/img/techcamp.jpg',
-        upvote: 278,
-        description: 'biggest coding school',
-        maker: {
-          name: 'TechCamp',
-          avatar: '/img/techcamp.png'
-        }
-      },
       comments: [{
         name: "NERV",
         avatar: "/img/NERV.jpg",
@@ -66452,7 +66442,7 @@ var ProductPopup = function (_React$Component) {
           null,
           _react2.default.createElement('i', { className: 'fa fa-sort-asc' })
         ),
-        this.state.product.upvote
+        this.props.upvote
       );
     }
   }, {
@@ -66460,19 +66450,19 @@ var ProductPopup = function (_React$Component) {
     value: function renderHeader() {
       return _react2.default.createElement(
         'header',
-        { style: { backgroundImage: 'url(' + this.state.product.media + ')' } },
+        { style: { backgroundImage: 'url(' + this.props.media + ')' } },
         _react2.default.createElement(
           'section',
           { className: 'header-shadow' },
           _react2.default.createElement(
             'h1',
             null,
-            this.state.product.name
+            this.props.name
           ),
           _react2.default.createElement(
             'p',
             null,
-            this.state.product.description
+            this.props.description
           ),
           _react2.default.createElement(
             'section',
@@ -66480,7 +66470,7 @@ var ProductPopup = function (_React$Component) {
             this.renderUpvoteButton(),
             _react2.default.createElement(
               'a',
-              { className: 'getit-btn', href: this.state.product.link, target: '_blank' },
+              { className: 'getit-btn', href: this.props.link, target: '_blank' },
               'GET IT'
             )
           )
