@@ -9,20 +9,6 @@ import Actions from '../../actions';
 class ProductPopup extends React.Component {
   constructor() {
     super();
-    this.state = {
-      comments: [
-        {
-          name: "NERV",
-          avatar: "/img/NERV.jpg",
-          content: "最優先事項だ"
-        },
-        {
-          name: "Anzai",
-          avatar: "/img/Anzai.jpeg",
-          content: "なぁ〜んか勘違いしとりゃせんか？"
-        }
-      ]
-    }
   }
 
   static getStores() {
@@ -33,7 +19,14 @@ class ProductPopup extends React.Component {
     return ProductStore.getState();
   }
 
-  renderHeader() {
+  shouldComponentUpdate(nextProps, nextState) {
+    if (nextProps.status && this.props.status != nextProps.status) {
+      Actions.getComments(this.props.pid);
+    }
+    return true;
+  }
+
+renderHeader() {
     return (
       <header style={{backgroundImage: 'url(' + this.props.media + ')'}}>
         <section className="header-shadow">
@@ -94,7 +87,7 @@ class ProductPopup extends React.Component {
     return (
       <ul className="comment-list">
         {
-          this.state.comments.map(function(comment, idx) {
+          this.props.comments.map(function(comment, idx) {
             return (
               <li key={idx}>
                 <img className="medium-avatar" src={comment.avatar}/>
