@@ -58,8 +58,10 @@ class Actions {
   logout() {
     return(dispatch) => {
       Firebase.auth().signOut().then(function() {
+        // Sign-out successful.
         dispatch(null);
       }, function(error) {
+        // An error happened.
         console.log(error);
       });
     }
@@ -88,15 +90,23 @@ class Actions {
 
   addVote(productId, userId) {
     return (dispatch) => {
-      var firebaseRef = Firebase.database().ref('products/'+productId+'/upvote');
+      var voteRef = Firebase.database().ref('votes/'+productId+'/'+userId);
+      var upvoteRef = Firebase.database().ref('products/'+productId+'/upvote');
 
-      var vote = 0;
-      firebaseRef.on('value', function(snapshot) {
-        vote = snapshot.val();
+      voteRef.on('value', function(snapshot) {
+        if(snapshot.val() == null) {
+          voteRef.set(true);
+
+          var vote = 0;
+          upvoteRef.on('value', function(snapshot) {
+            vote = snapshot.val();
+          });
+          upvoteRef.set(vote+1);
+        }
       });
-      firebaseRef.set(vote+1);
     }
   }
+
 }
 
 export default alt.createActions(Actions);

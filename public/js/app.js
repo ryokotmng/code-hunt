@@ -65469,8 +65469,10 @@ var Actions = function () {
     value: function logout() {
       return function (dispatch) {
         _firebase2.default.auth().signOut().then(function () {
+          // Sign-out successful.
           dispatch(null);
         }, function (error) {
+          // An error happened.
           console.log(error);
         });
       };
@@ -65501,13 +65503,20 @@ var Actions = function () {
     key: 'addVote',
     value: function addVote(productId, userId) {
       return function (dispatch) {
-        var firebaseRef = _firebase2.default.database().ref('products/' + productId + '/upvote');
+        var voteRef = _firebase2.default.database().ref('votes/' + productId + '/' + userId);
+        var upvoteRef = _firebase2.default.database().ref('products/' + productId + '/upvote');
 
-        var vote = 0;
-        firebaseRef.on('value', function (snapshot) {
-          vote = snapshot.val();
+        voteRef.on('value', function (snapshot) {
+          if (snapshot.val() == null) {
+            voteRef.set(true);
+
+            var vote = 0;
+            upvoteRef.on('value', function (snapshot) {
+              vote = snapshot.val();
+            });
+            upvoteRef.set(vote + 1);
+          }
         });
-        firebaseRef.set(vote + 1);
       };
     }
   }]);
@@ -66224,7 +66233,7 @@ var ProductItem = function (_React$Component) {
     };
 
     _this.handleVote = function () {
-      _actions2.default.addVote(_this.props.pid, _this.props.user);
+      _actions2.default.addVote(_this.props.pid, _this.props.user.id);
     };
 
     _this.state = {
