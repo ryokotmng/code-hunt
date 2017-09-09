@@ -1,5 +1,5 @@
 import React from 'react';
-import LoginPopup from './LoginPopup'
+import LoginPopup from './LoginPopup';
 import PostPopup from './PostPopup';
 import ProfileMenu from './ProfileMenu';
 

@@ -18,11 +18,13 @@
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
     "babelify": "^7.3.0",
+    "body-parser": "^1.14.2",
     "express": "^4.15.4",
     "firebase": "^4.3.0",
     "lodash": "^4.17.4",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
+    "request": "2.61.0",
     "watch": "^1.0.2"
   }
 }
